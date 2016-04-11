@@ -55,34 +55,43 @@ class PathLine extends Pane{
 		pt.play();
 		
 
-		PathTransition pt2 = new PathTransition();
-		pt2.setDuration(Duration.millis(400));
+		
 		
 		for(int i = 1; i <= 7; i++){
 			a = (int)(Math.random() * 2 + 1);
-
+			pt = new PathTransition();
+			
+			
 			if(a == 1){
 				pathline = new Line(x, y, x + 10, y + 20);
-				pt.setDuration(Duration.millis(400));
-				pt.setPath(pathline);
-				pt.setNode(ball);
-				pt.play();
+				paint(x, y, x + 10, y + 20,400+400*i);
+				//pt.setDuration(Duration.millis(200));
+				//pt.setPath(pathline);
+				//pt.setNode(ball);
+				//pt.play();
 				getChildren().add(pathline);
 				x = x + 10;
 				y = y + 20;
 			}
 			else{
 				pathline = new Line(x, y, x - 10, y + 20);
-				pt.setDuration(Duration.millis(400));
-				pt.setPath(pathline);
-				pt.setNode(ball);
-				pt.play();
-				getChildren().add(new Line(x, y, x - 10, y + 20));
+				paint(x, y, x - 10, y + 20,400+400*i);
+				//pt.setDuration(Duration.millis(200));
+				//pt.setPath(pathline);
+				//pt.setNode(ball);
+				//pt.play();
+				getChildren().add(pathline);
 				x = x - 10;
 				y = y + 20;
 			}
 		}
-		getChildren().add(new Line(x, y, x, y+43));
+		pathline = new Line(x, y, x, y + 42);
+		getChildren().add(pathline);
+		paint(x, y, x, y + 42,400);
+		//pt = new PathTransition();
+		//pt.setPath(pathline);
+		//pt.setNode(ball);
+		//pt.play();
 		
 		
 		//Polyline line = new Polyline();
@@ -93,6 +102,19 @@ class PathLine extends Pane{
 		//getChildren().add(line);
 
 
+	}
+	
+	public void paint(int x,int y,int x1,int y1,int time){
+		Line pathline = new Line(x,y,x1,y1);
+		Circle ball2 = new Circle();
+		ball2.setRadius(5);
+		ball2.setFill(Color.RED);
+		getChildren().add(ball2);
+		PathTransition pt2 = new PathTransition();
+		pt2.setDuration(Duration.millis(400));
+		pt2.setPath(pathline);
+		pt2.setNode(ball2);
+		pt2.play();
 	}
 	
 }
