@@ -17,9 +17,14 @@ public class BeanMachine extends Application{
 	public void start(Stage primaryStage){
 		
 		Pane pane = new BeanMachinePane();
-		Pane path = new PathLine();
-			
-		pane.getChildren().add(path);
+		//Pane path = new PathLine();
+		int j = 0;
+		//pane.getChildren().add(path);
+		for(int i = 0; i <= 9; i++){
+				pane.getChildren().add(new PathLine());
+				
+		}
+
 		
 		// Create a scene and place it in the stage
 		Scene scene = new Scene(pane, 400, 300); 
@@ -69,34 +74,18 @@ class PathLine extends Pane{
 		list.add(x);
 		list.add(y + 42.0);
 
-		
 		Circle ball = new Circle();
 		ball.setRadius(5);
 		ball.setFill(Color.RED);
 		getChildren().add(ball);
 		PathTransition pt = new PathTransition();
-		pt.setDuration(Duration.millis(1000));
+		pt.setDuration(Duration.millis(800));
 		pt.setPath(polyline);
 		pt.setNode(ball);
 		pt.play();
-		
 
 
-	}
-	
-	/*public void paint(int x,int y,int x1,int y1,int time){
-		Line pathline = new Line(x,y,x1,y1);
-		Circle ball2 = new Circle();
-		ball2.setRadius(5);
-		ball2.setFill(Color.RED);
-		getChildren().add(ball2);
-		PathTransition pt2 = new PathTransition();
-		pt2.setDuration(Duration.millis(400));
-		pt2.setPath(pathline);
-		pt2.setNode(ball2);
-		pt2.play();
-	}*/
-	
+	}	
 }
 
 // BeanMachine class to create bean machine
