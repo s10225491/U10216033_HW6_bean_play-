@@ -18,13 +18,8 @@ public class BeanMachine extends Application{
 		
 		Pane pane = new BeanMachinePane();
 		Pane path = new PathLine();
-		
-		
+			
 		pane.getChildren().add(path);
-		
-		//PathTransition pt = new PathTransition();
-		//pt.setPath(path);
-
 		
 		// Create a scene and place it in the stage
 		Scene scene = new Scene(pane, 400, 300); 
@@ -37,74 +32,59 @@ public class BeanMachine extends Application{
 class PathLine extends Pane{
 	
 	public PathLine(){
-		Line pathline = new Line(200, 40, 200, 65);
-		getChildren().add(pathline);
+		
+		Polyline polyline = new Polyline();
+		ObservableList<Double> list = polyline.getPoints();
+		
+		list.add(200.0);
+		list.add(40.0);
+		
+		list.add(200.0);
+		list.add(65.0);
+	
+		// getChildren().add(polyline);
 		
 		int a = 0;
-		int x = 200;
-		int y = 65;
+		double x = 200.0;
+		double y = 65.0;
+		
+		for(int i = 1; i <= 7; i++){
+			a = (int)(Math.random() * 2 + 1);
+			if(a == 1){
+				list.add(x + 10.0);
+				list.add(y + 20.0);
+
+				x = x + 10;
+				y = y + 20;
+			}
+			else{
+				list.add(x - 10.0);
+				list.add(y + 20.0);
+
+				x = x - 10;
+				y = y + 20;
+			}
+		}
+		
+		list.add(x);
+		list.add(y + 42.0);
+
 		
 		Circle ball = new Circle();
 		ball.setRadius(5);
 		ball.setFill(Color.RED);
 		getChildren().add(ball);
 		PathTransition pt = new PathTransition();
-		pt.setDuration(Duration.millis(400));
-		pt.setPath(pathline);
+		pt.setDuration(Duration.millis(1000));
+		pt.setPath(polyline);
 		pt.setNode(ball);
 		pt.play();
 		
 
-		
-		
-		for(int i = 1; i <= 7; i++){
-			a = (int)(Math.random() * 2 + 1);
-			pt = new PathTransition();
-			
-			
-			if(a == 1){
-				pathline = new Line(x, y, x + 10, y + 20);
-				paint(x, y, x + 10, y + 20,400+400*i);
-				//pt.setDuration(Duration.millis(200));
-				//pt.setPath(pathline);
-				//pt.setNode(ball);
-				//pt.play();
-				getChildren().add(pathline);
-				x = x + 10;
-				y = y + 20;
-			}
-			else{
-				pathline = new Line(x, y, x - 10, y + 20);
-				paint(x, y, x - 10, y + 20,400+400*i);
-				//pt.setDuration(Duration.millis(200));
-				//pt.setPath(pathline);
-				//pt.setNode(ball);
-				//pt.play();
-				getChildren().add(pathline);
-				x = x - 10;
-				y = y + 20;
-			}
-		}
-		pathline = new Line(x, y, x, y + 42);
-		getChildren().add(pathline);
-		paint(x, y, x, y + 42,400);
-		//pt = new PathTransition();
-		//pt.setPath(pathline);
-		//pt.setNode(ball);
-		//pt.play();
-		
-		
-		//Polyline line = new Polyline();
-		//ObservableList<Double> list = line.getPoints();
-		
-		//list.add(200.0,40.0,200.0,20.0);
-		
-		//getChildren().add(line);
-
 
 	}
 	
-	public void paint(int x,int y,int x1,int y1,int time){
+	/*public void paint(int x,int y,int x1,int y1,int time){
 		Line pathline = new Line(x,y,x1,y1);
 		Circle ball2 = new Circle();
 		ball2.setRadius(5);
@@ -115,7 +95,7 @@ class PathLine extends Pane{
 		pt2.setPath(pathline);
 		pt2.setNode(ball2);
 		pt2.play();
-	}
+	}*/
 	
 }
 
