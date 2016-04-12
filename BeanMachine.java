@@ -21,8 +21,7 @@ public class BeanMachine extends Application{
 		int j = 0;
 		//pane.getChildren().add(path);
 		for(int i = 0; i <= 9; i++){
-				pane.getChildren().add(new PathLine());
-				
+			pane.getChildren().add(new PathLine());
 		}
 
 		
